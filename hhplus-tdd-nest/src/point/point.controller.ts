@@ -63,7 +63,7 @@ export class PointController {
         const userId = this.parseUserId(id);
         const amount = pointDto.amount;
         
-        // 🔧 충전 금액 검증
+        // 충전 금액 검증
         if (amount <= 0) {
             throw new BadRequestException('Charge amount must be positive');
         }
@@ -104,7 +104,7 @@ export class PointController {
         const userId = this.parseUserId(id);
         const amount = pointDto.amount;
         
-        // 🔧 사용 금액 검증 추가
+        // 사용 금액 검증 추가
         if (amount <= 0) {
             throw new BadRequestException('Use amount must be positive');
         }
@@ -138,12 +138,12 @@ export class PointController {
             updatedUser.updateMillis,
         );
 
-        // 🔧 가장 중요한 수정: return 추가!
+        // 가장 중요한 수정: return 추가!
         return updatedUser;
     }
 
     /**
-     * 🔧 새로 추가: 유저 ID 파싱 및 검증을 위한 헬퍼 메서드
+     * 새로 추가: 유저 ID 파싱 및 검증을 위한 헬퍼 메서드
      */
     private parseUserId(id: string): number {
         const userId = Number.parseInt(id);
