@@ -65,7 +65,7 @@ describe('PointController', () => {
             app.get<jest.Mocked<PointHistoryTable>>(PointHistoryTable);
     });
 
-    // 🎠 "포인트 조회" 구역 그룹핑(PointController 속)
+    // "포인트 조회" 구역 그룹핑(PointController 속)
     describe('point 조회', () => {
         // 실제 테스트 it (test와 같음. it을 많이 씀. 독해 자연스러움?)
         // Promise를 다루는데 async/await 써야 함.
@@ -77,17 +77,17 @@ describe('PointController', () => {
                 updateMillis: Date.now(),
             };
 
-            // 🎬 1단계: 가짜 함수에게 "대본" 주기 (설정)
+            // 1단계: 가짜 함수에게 "대본" 주기 (설정)
             //! 실제로도 pointControll.point 메서드에 selectById가 1번 호출되어서 여기서도 1번 호출시켰고 리턴값도 정함.
             mockUserDb.selectById.mockResolvedValue(mockUser);
             // "어떤 파라미터로 호출되든 mockUser를 돌려줘!"
             // mockResolvedValue 사용해서 가짜 리턴값 설정(미리 답 정해두기! 어떤 userId로 물어봐도 mockUser로 똑같이 대답해줄것)
 
-            // 🎭 2단계: 실제 연기하기 (호출)
+            // 2단계: 실제 연기하기 (호출)
             const result = await pointController.point('123');
             // 내부적으로: mockUserDb.selectById(123) 호출됨!
 
-            // 🕵️ 3단계: 연기 잘했나 확인하기. 실제 검증
+            // 3단계: 연기 잘했나 확인하기. 실제 검증
             expect(mockUserDb.selectById).toHaveBeenCalledWith(123);
             // "정말 123으로 호출했니?"
             // toHaveBeenCalledWith : Jest에서 "가짜 함수가 정확한 인수(파라미터)로 호출되었는지 확인하는 도구
@@ -97,7 +97,7 @@ describe('PointController', () => {
         it('존재하지 않는 유저 조회시 에러를 던져야 한다', async () => {
             mockUserDb.selectById.mockResolvedValue(null);
 
-            // 🎯 에러가 던져지는지 확인
+            // 에러가 던져지는지 확인
             await expect(pointController.point('999')).rejects.toThrow(
                 'User 999 not found',
             );
